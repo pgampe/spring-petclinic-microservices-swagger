@@ -4,6 +4,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: spring-petclinic-microservices-swagger.{{ .appName }}
+  namespace: {{ .Release.Namespace }}
   labels:
     app: {{ .appName }}
             {{- include "spring-petclinic-microservices-swagger.labels" . | nindent 4 }}

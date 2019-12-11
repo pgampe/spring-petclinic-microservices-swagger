@@ -4,6 +4,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: spring-petclinic-microservices-swagger.{{ .appName }}
+  namespace: {{ .Release.Namespace }}
   labels:
     app: {{ .appName }}
         {{- include "spring-petclinic-microservices-swagger.labels" . | nindent 4 }}
@@ -30,7 +31,7 @@ spec:
           image: {{ .Values.image.registry }}springcommunity/spring-petclinic-{{ .appName }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["./dockerize"]
-          args: ["-wait=tcp://discovery-server.svc.{{ .Values.clusterDNSsuffix }}:8888","-timeout=60s","--","java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+          args: ["-wait=tcp://discovery-server.{{ default "default" .Release.Namespace }}.svc.{{ .Values.clusterDNSsuffix }}:8888","-timeout=60s","--","java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
           ports:
             - containerPort: {{ .appPort}}
           resources:
