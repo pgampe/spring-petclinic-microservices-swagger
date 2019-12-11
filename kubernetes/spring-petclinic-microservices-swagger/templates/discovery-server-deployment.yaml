@@ -27,8 +27,8 @@ spec:
             {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .appName }}
-          image: springcommunity/spring-petclinic-{{ .appName }}
-          imagePullPolicy: IfNotPresent
+          image: {{ .Values.image.registry }}springcommunity/spring-petclinic-{{ .appName }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["./dockerize"]
           args: ["-wait=tcp://config-server.svc.{{ .Values.clusterDNSsuffix }}:8888","-timeout=60s","--","java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
           ports:

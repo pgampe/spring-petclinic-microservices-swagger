@@ -27,8 +27,8 @@ spec:
             {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .appName }}
-          image: springcommunity/spring-petclinic-{{ .appName }}
-          imagePullPolicy: IfNotPresent
+          image: {{ .Values.image.registry }}springcommunity/spring-petclinic-{{ .appName }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: {{ .appPort}}
           resources:

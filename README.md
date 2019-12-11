@@ -45,8 +45,7 @@ from a project root.
 Once the images are available you can install the helm chart in `kubernetes/spring-petclinic-microservices-swagger`.
 Run `helm install myrelease .` inside this folder. You can pass a kubernetes namespace with `-n mynamespace`.
 
-Note: The current helm chart assumes that the images are already available locally.
-
+Note: The current helm chart assumes that the images are already available locally. To override this, use `--set image.registry="https://foo.bar/"` as an additional parameter.
 
 ## Understanding the Spring Petclinic application
 

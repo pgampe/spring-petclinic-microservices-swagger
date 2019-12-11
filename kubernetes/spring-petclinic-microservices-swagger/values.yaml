@@ -7,7 +7,7 @@ replicaCount: 1
 clusterDNSsuffix: cluster.local
 
 image:
-  repository: nginx
+  registry: ""
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
