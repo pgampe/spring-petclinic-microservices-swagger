@@ -47,6 +47,8 @@ Run `helm install myrelease .` inside this folder. You can pass a kubernetes nam
 
 Note: The current helm chart assumes that the images are already available locally. To override this, use `--set image.registry="https://foo.bar/"` as an additional parameter.
 
+To view the rendered manifest files without installing them, use `helm template .`. To test them against your current kubernetes without executing them, use `helm template . |kubectl apply --dry-run --validate -f -`.
+
 ## Understanding the Spring Petclinic application
 
 [See the presentation of the Spring Petclinic Framework version](http://fr.slideshare.net/AntoineRey/spring-framework-petclinic-sample-application)
