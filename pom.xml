@@ -149,6 +149,15 @@
                                         <goal>build</goal>
                                     </goals>
                                 </execution>
+                                <execution>
+                                    <id>tag-latest</id>
+                                    <goals>
+                                        <goal>tag</goal>
+                                    </goals>
+                                    <configuration>
+                                        <tag>latest</tag>
+                                    </configuration>
+                                </execution>
                             </executions>
                             <configuration>
                                 <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
