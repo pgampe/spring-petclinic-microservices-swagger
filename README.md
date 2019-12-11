@@ -39,6 +39,15 @@ The `master` branch uses an  Alpine linux  with JRE 8 as Docker base. You will f
 *NOTE: Under MacOSX or Windows, make sure that the Docker VM has enough memory to run the microservices. The default settings
 are usually not enough and make the `docker-compose up` painfully slow.*
 
+## Starting services with kubernetes
+In order to start entire infrastructure using Docker, you have to build images by executing `./mvnw clean install -PbuildDocker` 
+from a project root. 
+Once the images are available you can install the helm chart in `kubernetes/spring-petclinic-microservices-swagger`.
+Run `helm install myrelease .` inside this folder. You can pass a kubernetes namespace with `-n mynamespace`.
+
+Note: The current helm chart assumes that the images are already available locally.
+
+
 ## Understanding the Spring Petclinic application
 
 [See the presentation of the Spring Petclinic Framework version](http://fr.slideshare.net/AntoineRey/spring-framework-petclinic-sample-application)

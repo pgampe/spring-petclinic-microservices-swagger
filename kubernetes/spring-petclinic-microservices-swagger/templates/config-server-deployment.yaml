@@ -1,0 +1,36 @@
+{{- $_ := set . "appName" "config-server" }}
+{{- $__ := set . "appPort" 8888 }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-petclinic-microservices-swagger.{{ .appName }}
+  labels:
+    app: {{ .appName }}
+            {{- include "spring-petclinic-microservices-swagger.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .appName }}
+        {{- include "spring-petclinic-microservices-swagger.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app: {{ .appName }}
+          {{- include "spring-petclinic-microservices-swagger.selectorLabels" . | nindent 8 }}
+    spec:
+            {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+            {{- toYaml . | nindent 6 }}
+            {{- end }}
+      securityContext:
+            {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .appName }}
+          image: springcommunity/spring-petclinic-{{ .appName }}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: {{ .appPort}}
+          resources:
+            limits:
+              memory: 512Mi
